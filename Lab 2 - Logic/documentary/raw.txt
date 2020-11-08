@@ -4,4 +4,9 @@ Ví dụ:
 
 1. Slide bài giảng: 
 	https://drive.google.com/drive/folders/13iq-fejXC4x0XYdeZZ57wAHDo6brccoQ
-
+------------------------------------------------------------------------------------------------
+1.  TÌM HIỂU PROLOG:
+	+ https://vi.wikipedia.org/wiki/Prolog
+	+ Sách: Lập trình Lôgích trong Prolog, PGS.TS Phan Huy Khánh, Nhà xuất bản Đại Học Quốc 
+Gia Hà Nội
+	+ https://www.101computing.net/prolog-family-tree/
