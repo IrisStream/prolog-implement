@@ -1,6 +1,6 @@
 /*--------------------------FACTS------------------------------*/
 
-/* Males */
+/* male(Person) : Person is a man */
 male('Philip').
 male('Charles').
 male('Mark Philips').
@@ -14,7 +14,7 @@ male('Mike Tindall').
 male('James Viscount Severn').
 male('George').
 
-/* Females */
+/* female(Person): Person is a woman */
 female('Elizabeth II').
 female('Diana').
 female('Camilla Parker Bowles').
@@ -32,7 +32,7 @@ female('Savannah Phillips').
 female('Isla Phillips').
 female('Mia Grace Tindall').
 
-/* Married */
+/* married(Person1, Person2): Person1 married Person2 */
 married('Elizabeth II', 'Philip').
 married('Diana', 'Charles').
 married('Charles', 'Camilla Parker Bowles').
@@ -44,12 +44,12 @@ married('William', 'Kate Middleton').
 married('Autumn Kelly', 'Peter Phillips').
 married('Zara Phillips', 'Mike Tindall').
 
-/* Divorced */
+/* divorced(Person1, Person2): Person1 divorces Person2 */
 divorced('Diana', 'Charles').
 divorced('Mark Phillips', 'Anne').
 divorced('Sarah Ferguson', 'Andrew').
 
-/*Parent of*/
+/* parent(Person1, Person2): Person1 is parent of Person2 */
 parent('Elizabeth II', 'Charles').
 parent('Philip', 'Charles').
 parent('Elizabeth II', 'Anne').
@@ -94,19 +94,24 @@ parent('Mike Tindall', 'Mia Grace Tindall').
 
 /*--------------------------RULES------------------------------*/
 
-married(X,Y):- married(Y,X).
+is_married(Husband, Wife):-
+    married(Husband, Wife);
+    married(Wife, Husband).
 
-divorced(X,Y):- divorced(Y,X).
+is_divorced(Husband, Wife):-
+    divorced(Husband, Wife);
+    divorced(Wife, Husband).
 
 husband(Person, Wife):-
     male(Person),
-    married(Person, Wife),
-    not(divorced(Person, Wife)).
+    female(Wife),
+    is_married(Person, Wife),
+    not(is_divorced(Person, Wife)).
 
 wife(Person, Husband):-
     female(Person),
-    married(Person, Husband),
-    not(divorced(Person, Husband)).
+    is_married(Person, Husband),
+    not(is_divorced(Person, Husband)).
 
 father(Parent, Child):-
     male(Parent),
@@ -156,3 +161,60 @@ granddaughter(GD,GP):-
     female(GD),
     parent(P,GD),
     parent(GP,P).
+
+/*--------------------------> RULES CỦA BB <------------------------------*/
+
+sibling(Person1,Person2):-
+    mother(M1, Person1),
+    mother(M2, Person2),
+    father(F1, Person1),
+    father(F2, Person2),
+    M1 == M2, F1 == F2,
+    Person1 \== Person2.
+
+cousin(Person1, Person2):-
+    parent(X, Person1),
+    parent(Y, Person2),
+    (cousin(X, Y);
+    sibling(X, Y)).
+
+brother(Person,Sibling):-
+    sibling(Person, Sibling),
+    male(Person).
+
+sister(Person,Sibling):-
+    sibling(Person, Sibling),
+    female(Person).
+
+brother_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    male(Person).
+
+sister_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    female(Person).
+
+aunt(Person,NieceNephew):-
+    parent(X, NieceNephew), (
+        sister(Person, X);
+        sister_cousin(Person, X); 
+        (
+            wife(Person, Y),
+            (brother(Y, X);
+            brother_cousin(Y, X))
+        )
+    ).
+
+uncle(Person,NieceNephew):-
+    husband(Person, X),
+    aunt(X, NieceNephew).
+
+niece(Person,AuntUncle):-
+    female(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+nephew(Person,AuntUncle):-
+    male(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+/*--------------------------> END RULES CỦA BB <------------------------------*/

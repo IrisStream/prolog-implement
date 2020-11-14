@@ -89,8 +89,4 @@ graduated_type(Student, 'Yeu'):-
     GPA < 5.
 
 graduate_valedictorian(Student):-
-    student_of(Student, Faculty),
-    student_of(AnotherStudent, Faculty):-
-        gpa(Student, GPA_A),
-        gpa(AnotherStudent, GPA_B),
-        GPA_A >= GPA_B.
+    gpa(Id, W), \+ (gpa(_, W1), W1 > W).
