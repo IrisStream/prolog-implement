@@ -126,3 +126,56 @@ son(Child, Parent):-
 daughter(Child, Parent):-
     female(Child),
     parent(Parent, Child).
+
+/*--------------------------> RULES CỦA BB <------------------------------*/
+
+sibling(Person1,Person2):-
+    parent(X, Person1),
+    parent(X, Person2).
+
+cousin(Person1, Person2):-
+    parent(X, Person1),
+    parent(Y, Person1),
+    (cousin(X, Y);
+    sibling(X, Y)).
+
+brother(Person,Sibling):-
+    sibling(Person, Sibling),
+    male(Person).
+
+sister(Person,Sibling):-
+    sibling(Person, Sibling),
+    female(Person).
+
+brother_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    male(Person).
+
+sister_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    female(Person).
+
+aunt(Person,NieceNephew):-
+    sister(Person, mother(NieceNephew));
+    sister(Person, father(NieceNephew));
+    sister_cousin(Person, father(NieceNephew));
+    sister_cousin(Person, mother(NieceNephew)).
+
+
+uncle(Person,NieceNephew):-
+    brother(Person, father(NieceNephew));
+    brother(Person, mother(NieceNephew));
+    brother_cousin(Person, mother(NieceNephew));
+    brother_cousin(Person, father(NieceNephew)).
+
+
+niece(Person,AuntUncle):-
+    female(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+
+nephew(Person,AuntUncle):-
+    male(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+/*--------------------------> END RULES CỦA BB <------------------------------*/
