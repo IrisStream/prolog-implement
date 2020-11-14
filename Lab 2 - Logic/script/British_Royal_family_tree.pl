@@ -1,6 +1,6 @@
 /*--------------------------FACTS------------------------------*/
 
-/* Males */
+/* male(Person) : Person is a man */
 male('Philip').
 male('Charles').
 male('Mark Philips').
@@ -14,7 +14,7 @@ male('Mike Tindall').
 male('James Viscount Severn').
 male('George').
 
-/* Females */
+/* female(Person): Person is a woman */
 female('Elizabeth II').
 female('Diana').
 female('Camilla Parker Bowles').
@@ -32,7 +32,7 @@ female('Savannah Phillips').
 female('Isla Phillips').
 female('Mia Grace Tindall').
 
-/* Married */
+/* married(Person1, Person2): Person1 married Person2 */
 married('Elizabeth II', 'Philip').
 married('Diana', 'Charles').
 married('Charles', 'Camilla Parker Bowles').
@@ -44,12 +44,12 @@ married('William', 'Kate Middleton').
 married('Autumn Kelly', 'Peter Phillips').
 married('Zara Phillips', 'Mike Tindall').
 
-/* Divorced */
+/* divorced(Person1, Person2): Person1 divorces Person2 */
 divorced('Diana', 'Charles').
 divorced('Mark Phillips', 'Anne').
 divorced('Sarah Ferguson', 'Andrew').
 
-/*Parent of*/
+/* parent(Person1, Person2): Person1 is parent of Person2 */
 parent('Elizabeth II', 'Charles').
 parent('Philip', 'Charles').
 parent('Elizabeth II', 'Anne').
@@ -94,19 +94,24 @@ parent('Mike Tindall', 'Mia Grace Tindall').
 
 /*--------------------------RULES------------------------------*/
 
-married(X,Y):- married(Y,X).
+is_married(Husband, Wife):-
+    married(Husband, Wife);
+    married(Wife, Husband).
 
-divorced(X,Y):- divorced(Y,X).
+is_divorced(Husband, Wife):-
+    divorced(Husband, Wife);
+    divorced(Wife, Husband).
 
 husband(Person, Wife):-
     male(Person),
-    married(Person, Wife),
-    not(divorced(Person, Wife)).
+    female(Wife),
+    is_married(Person, Wife),
+    not(is_divorced(Person, Wife)).
 
 wife(Person, Husband):-
     female(Person),
-    married(Person, Husband),
-    not(divorced(Person, Husband)).
+    is_married(Person, Husband),
+    not(is_divorced(Person, Husband)).
 
 father(Parent, Child):-
     male(Parent),
