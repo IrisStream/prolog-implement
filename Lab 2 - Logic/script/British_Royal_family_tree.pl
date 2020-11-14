@@ -130,12 +130,16 @@ daughter(Child, Parent):-
 /*--------------------------> RULES CỦA BB <------------------------------*/
 
 sibling(Person1,Person2):-
-    parent(X, Person1),
-    parent(X, Person2).
+    mother(M1, Person1),
+    mother(M2, Person2),
+    father(F1, Person1),
+    father(F2, Person2),
+    M1 == M2, F1 == F2,
+    Person1 \== Person2.
 
 cousin(Person1, Person2):-
     parent(X, Person1),
-    parent(Y, Person1),
+    parent(Y, Person2),
     (cousin(X, Y);
     sibling(X, Y)).
 
@@ -156,23 +160,23 @@ sister_cousin(Person,Sibling):-
     female(Person).
 
 aunt(Person,NieceNephew):-
-    sister(Person, mother(NieceNephew));
-    sister(Person, father(NieceNephew));
-    sister_cousin(Person, father(NieceNephew));
-    sister_cousin(Person, mother(NieceNephew)).
-
+    parent(X, NieceNephew), (
+        sister(Person, X);
+        sister_cousin(Person, X); 
+        (
+            wife(Person, Y),
+            (brother(Y, X);
+            brother_cousin(Y, X))
+        )
+    ).
 
 uncle(Person,NieceNephew):-
-    brother(Person, father(NieceNephew));
-    brother(Person, mother(NieceNephew));
-    brother_cousin(Person, mother(NieceNephew));
-    brother_cousin(Person, father(NieceNephew)).
-
+    husband(Person, X),
+    aunt(X, NieceNephew).
 
 niece(Person,AuntUncle):-
     female(Person),
     (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
-
 
 nephew(Person,AuntUncle):-
     male(Person),
