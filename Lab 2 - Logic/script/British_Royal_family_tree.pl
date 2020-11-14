@@ -126,3 +126,33 @@ son(Child, Parent):-
 daughter(Child, Parent):-
     female(Child),
     parent(Parent, Child).
+
+/*TÚ LÀM*/
+
+grandparent(GP,GC):-
+    parent(GP,P),
+    parent(P,GC).
+
+grandmother(GM,GC):-
+    female(GM),
+    parent(GM,P),
+    parent(P,GC).
+
+grandfather(GF,GC):-
+    male(GF),
+    parent(GF,P),
+    parent(P,GC).
+
+grandchild(GC,GP):-
+    parent(P,GC),
+    parent(GP,P).
+
+grandson(GS,GP):-
+    male(GS),
+    parent(P,GS),
+    parent(GP,P).
+
+granddaughter(GD,GP):-
+    female(GD),
+    parent(P,GD),
+    parent(GP,P).
