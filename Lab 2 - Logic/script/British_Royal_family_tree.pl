@@ -131,3 +131,63 @@ son(Child, Parent):-
 daughter(Child, Parent):-
     female(Child),
     parent(Parent, Child).
+<<<<<<< HEAD
+=======
+
+/*--------------------------> RULES CỦA BB <------------------------------*/
+
+sibling(Person1,Person2):-
+    mother(M1, Person1),
+    mother(M2, Person2),
+    father(F1, Person1),
+    father(F2, Person2),
+    M1 == M2, F1 == F2,
+    Person1 \== Person2.
+
+cousin(Person1, Person2):-
+    parent(X, Person1),
+    parent(Y, Person2),
+    (cousin(X, Y);
+    sibling(X, Y)).
+
+brother(Person,Sibling):-
+    sibling(Person, Sibling),
+    male(Person).
+
+sister(Person,Sibling):-
+    sibling(Person, Sibling),
+    female(Person).
+
+brother_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    male(Person).
+
+sister_cousin(Person,Sibling):-
+    cousin(Person, Sibling),
+    female(Person).
+
+aunt(Person,NieceNephew):-
+    parent(X, NieceNephew), (
+        sister(Person, X);
+        sister_cousin(Person, X); 
+        (
+            wife(Person, Y),
+            (brother(Y, X);
+            brother_cousin(Y, X))
+        )
+    ).
+
+uncle(Person,NieceNephew):-
+    husband(Person, X),
+    aunt(X, NieceNephew).
+
+niece(Person,AuntUncle):-
+    female(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+nephew(Person,AuntUncle):-
+    male(Person),
+    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+
+/*--------------------------> END RULES CỦA BB <------------------------------*/
+>>>>>>> c132f222df8282d082564da951a910ddb16cb2f7
