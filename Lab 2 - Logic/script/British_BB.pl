@@ -129,38 +129,3 @@ daughter(Child, Parent):-
 
 /*----------------------------------------> predicate column #3 <----------------------------------------*/
 
-sibling(Person1,Person2):-
-    parent(X, Person1),
-    parent(X, Person2).
-
-% sibling(Person1,Person2):-
-%     sibling(parent(X, Person1), parent(X, Person2)).
-
-brother(Person,Sibling):-
-    sibling(Person, Sibling),
-    male(Person).
-
-
-sister(Person,Sibling):-
-    sibling(Person, Sibling),
-    female(Person).
-
-
-aunt(Person,NieceNephew):-
-    sister(Person, parent(NieceNephew)).
-
-
-uncle(Person,NieceNephew):-
-    brother(Person, parent(NieceNephew)).
-
-
-niece(Person,AuntUncle):-
-    female(Person),
-    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
-
-
-nephew(Person,AuntUncle):-
-    male(Person),
-    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
-
-
