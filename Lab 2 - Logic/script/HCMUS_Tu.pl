@@ -9,45 +9,76 @@ male('binh').
 female('my').
 female('hien').
 female('ha').
+female('tuong').
 
 faculty_of('cntt', 'khtn').
 faculty_of('cnsh', 'khtn').
 
 graduated('my').
+graduated('an').
+graduated('tuong').
 
-student('tu', 'khmt').
-student('son', 'khmt').
-student('bao', 'khdl').
+major_of_student('tu', 'khmt').
+major_of_student('son', 'khmt').
+major_of_student('bao', 'khdl').
+major_of_student('an','vlhn').
+major_of_student('ha', 'httt').
+major_of_student('tuong', 'nmpm').
 
-student_of('my', 'cnsh').
-student_of('tu', 'cntt').
-student_of('son', 'cntt').
-student_of('bao', 'cntt').
+faculty_of_student('tu', 'cntt').
+faculty_of_student('son', 'cntt').
+faculty_of_student('bao', 'cntt').
+faculty_of_student('an', 'vl').
+faculty_of_student('binh', 'toan').
+faculty_of_student('my', 'cnsh').
+faculty_of_student('hien', 'hoa').
+faculty_of_student('ha', 'cntt').
+faculty_of_student('tuong', 'cntt').
 
 gpa('tu', 7).
-gpa('son', 7.5).
+gpa('son', 8.5).
 gpa('bao', 7.5).
+gpa('an', 6).
+gpa('binh', 5.75).
 gpa('my', 9.9).
+gpa('hien', 7.3).
+gpa('ha', 6.5).
+gpa('tuong', 8).
 
 current_semester_gpa('tu', 6.5).
 current_semester_gpa('son', 7.3).
 current_semester_gpa('bao', 8.5).
-current_semester_gpa('my', 9.5).
+current_semester_gpa('binh', 7).
+current_semester_gpa('hien', 9.2).
+current_semester_gpa('ha', 5.5).
+
 
 training_point('tu', 80).
 training_point('son', 99).
 training_point('bao', 50).
-training_point('my', 85).
+training_point('an', 85).
+training_point('binh', 72).
+training_point('my', 90).
+training_point('hien', 68).
+training_point('ha', 88).
+training_point('tuong', 95).
 
 day_number_of_volunteer('tu', 5).
 day_number_of_volunteer('son', 7).
 day_number_of_volunteer('bao', 3).
-day_number_of_volunteer('my', 5).
+day_number_of_volunteer('an', 10).
+day_number_of_volunteer('binh', 6).
+day_number_of_volunteer('my', 2).
+day_number_of_volunteer('hien', 3).
+day_number_of_volunteer('ha', 4).
+day_number_of_volunteer('tuong', 4).
 
 english_degree('tu', 'ielts').
-english_degree('my', 'toeic').
 english_degree('son', 'ielts').
 english_degree('bao', 'vnu').
+english_degree('an', 'vnu').
+english_degree('my', 'toeic').
+english_degree('tuong', 'vnu').
 
 health_degree('tu').
 health_degree('son').
@@ -111,8 +142,8 @@ classmate(Student1,Student2):-
     studied(Student2,Class,Subject,Point2).
 
 same_major(Student1,Student2):-
-    student(Student1,Major),
-    student(Student2,Major),
+    major_of_student(Student1,Major),
+    major_of_student(Student2,Major),
     Student1\==Student2.
 
 gpa_greater(Student1,Student2):-
@@ -124,16 +155,16 @@ best_of_class(Student,Class,Subject):-
     studied(Student,Class,Subject,Point), \+ (studied(_,Class,Subject,Point1), Point1\=={null}, Point1 > Point).
 
 best_of_faculty(Student):-
-    student_of(Student,Faculty),
+    faculty_of_student(Student,Faculty),
     gpa(Student,Point), \+ (
-        student_of(AnotherStudent,Faculty),
+        faculty_of_student(AnotherStudent,Faculty),
         gpa(AnotherStudent,Point1),
         Point1 > Point).
 
 best_of_major(Student,Major):-
-    student(Student,Major),
+    major_of_student(Student,Major),
     gpa(Student,Point), \+ (
-        student(AnotherStudent,Major),
+        major_of_student(AnotherStudent,Major),
         gpa(AnotherStudent,Point1),
         Point1 > Point).
 
