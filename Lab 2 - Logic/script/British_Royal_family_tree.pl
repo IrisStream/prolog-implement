@@ -131,8 +131,6 @@ son(Child, Parent):-
 daughter(Child, Parent):-
     female(Child),
     parent(Parent, Child).
-<<<<<<< HEAD
-=======
 
 /*--------------------------> RULES CỦA BB <------------------------------*/
 
@@ -190,4 +188,3 @@ nephew(Person,AuntUncle):-
     (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
 
 /*--------------------------> END RULES CỦA BB <------------------------------*/
->>>>>>> c132f222df8282d082564da951a910ddb16cb2f7
