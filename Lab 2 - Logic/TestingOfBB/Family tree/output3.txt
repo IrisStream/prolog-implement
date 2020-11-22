@@ -1,0 +1,25 @@
+	?- mother(X,'Eugenie').
+{'X': "'Sarah Ferguson'"}
+Yes
+	?- grandfather(X,'George').
+{'X': "'Charles'"}
+Yes
+	?- uncle(X,'Kate Middleton').
+No
+	?- brother(X,'Edward').
+{'X': "'Andrew'"}
+{'X': "'Charles'"}
+Yes
+	?- father(X,'Harry').
+{'X': "'Charles'"}
+Yes
+	?- divorced('Diana','Charles').
+Yes
+	?- sibling('Mike Tindall','Elizabeth II').
+No
+	?- aunt('Louise Mountbatten Windsor','George').
+Yes
+	?- brother('Andrew','Charles').
+Yes
+	?- grandmother('Beatrice','Mia Grace Tindall').
+No

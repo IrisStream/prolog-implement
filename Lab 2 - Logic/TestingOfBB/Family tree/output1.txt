@@ -1,0 +1,20 @@
+	?-wife('Elizabeth II', 'George').
+No
+	?-husband('Timothy Laurence', 'William').
+No
+	?-father('Kate Middleton','George').
+No
+	?-mother('Autumn Kelly', 'Isla Phillips').
+Yes
+	?-child('Charles','Elizabeth II').
+Yes
+	?-son('Charles', 'Elizabeth II').
+Yes
+	?-daughter('Charles', 'Elizabeth II').
+No
+	?-uncle('Charles', 'Peter Phillips').
+Yes
+	?-granddaughter('Autumm Kelly', 'Elizabeth II').
+No
+	?-aunt('Elizabeth II', 'George').
+No

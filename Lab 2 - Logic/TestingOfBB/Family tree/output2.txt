@@ -1,0 +1,34 @@
+	?-sibling('Savannah Phillips', 'Isla Phillips').
+Yes
+	?-aunt(X, 'Mia Grace Tindall').
+{'X': "'Kate Middleton'"}
+{'X': "'Autumn Kelly'"}
+{'X': "'Louise Mountbatten Windsor'"}
+{'X': "'Eugenie'"}
+{'X': "'Beatrice'"}
+Yes
+	?-niece('Mia Grace Tindall', X).
+{'X': "'James Viscount Severn'"}
+{'X': "'Harry'"}
+{'X': "'William'"}
+{'X': "'Peter Phillips'"}
+{'X': "'Kate Middleton'"}
+{'X': "'Autumn Kelly'"}
+{'X': "'Louise Mountbatten Windsor'"}
+{'X': "'Eugenie'"}
+{'X': "'Beatrice'"}
+Yes
+	?-uncle('Harry', 'Mia Grace Tindall').
+Yes
+	?-brother('George', 'Charlote').
+No
+	?-father('Sophie Rhys-jones', 'Louise Mountbatten-Windsor').
+No
+	?-daughter('Louise Mountbatten-Windsor', 'Sophie Rhys-jones').
+No
+	?-daughter('Louise Mountbatten-Windsor', 'Edward').
+No
+	?-husband('Philip', 'Elizabeth II').
+Yes
+	?-wife('Elizabeth II', 'Philip').
+Yes
