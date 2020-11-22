@@ -261,6 +261,7 @@ def arg_parser():
 
 if __name__ == "__main__": 
     inputfile, queryfile, outputfile = arg_parser()
+    inputfile.append('input.pl')
     output = open(outputfile,'w')
     for file in inputfile:
         procFile(open(file),'KB')      # file on the command line
