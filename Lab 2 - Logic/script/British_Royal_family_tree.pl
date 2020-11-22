@@ -3,7 +3,7 @@
 /* male(Person) : Person is a man */
 male('Philip').
 male('Charles').
-male('Mark Philips').
+male('Mark Phillips').
 male('Timothy Laurence').
 male('Andrew').
 male('Edward').
@@ -94,127 +94,68 @@ parent('Mike Tindall', 'Mia Grace Tindall').
 
 /*--------------------------RULES------------------------------*/
 
-is_married(Husband, Wife):-
-    married(Husband, Wife);
-    married(Wife, Husband).
+is_married(Husband, Wife):- married(Husband, Wife).
+is_married(Husband, Wife):- married(Wife, Husband).
 
-is_divorced(Husband, Wife):-
-    divorced(Husband, Wife);
-    divorced(Wife, Husband).
+is_divorced(Husband, Wife):- divorced(Husband, Wife).
+is_divorced(Husband, Wife):- divorced(Wife, Husband).
 
-husband(Person, Wife):-
-    male(Person),
-    female(Wife),
-    is_married(Person, Wife),
-    not(is_divorced(Person, Wife)).
+husband(Person, Wife):- male(Person), female(Wife), is_married(Person, Wife), not(is_divorced(Person, Wife)).
 
-wife(Person, Husband):-
-    female(Person),
-    is_married(Person, Husband),
-    not(is_divorced(Person, Husband)).
+wife(Person, Husband):- female(Person), is_married(Person, Husband), not(is_divorced(Person, Husband)). 
 
-father(Parent, Child):-
-    male(Parent),
-    parent(Parent, Child).
+father(Parent, Child):- male(Parent), parent(Parent, Child).
 
-mother(Parent, Child):-
-    female(Parent),
-    parent(Parent, Child).
+mother(Parent, Child):- female(Parent), parent(Parent, Child).
 
-child(Child, Parent):-
-    parent(Parent, Child).
+child(Child, Parent):- parent(Parent, Child).
 
-son(Child, Parent):-
-    male(Child),
-    parent(Parent, Child).
+son(Child, Parent):- male(Child), parent(Parent, Child).
 
-daughter(Child, Parent):-
-    female(Child),
-    parent(Parent, Child).
+daughter(Child, Parent):- female(Child), parent(Parent, Child).
 
 /*TÚ LÀM*/
 
-grandparent(GP,GC):-
-    parent(GP,P),
-    parent(P,GC).
+grandparent(GP,GC):- parent(GP,P), parent(P,GC).
 
-grandmother(GM,GC):-
-    female(GM),
-    parent(GM,P),
-    parent(P,GC).
+grandmother(GM,GC):- female(GM), grandparent(GM,GC).
 
-grandfather(GF,GC):-
-    male(GF),
-    parent(GF,P),
-    parent(P,GC).
+grandfather(GF,GC):- male(GF), grandparent(GF,GC).
 
-grandchild(GC,GP):-
-    parent(P,GC),
-    parent(GP,P).
+grandchild(GC,GP):- grandparent(GP,GC).
 
-grandson(GS,GP):-
-    male(GS),
-    parent(P,GS),
-    parent(GP,P).
+grandson(GS,GP):- male(GS), grandchild(GS, GP).
 
-granddaughter(GD,GP):-
-    female(GD),
-    parent(P,GD),
-    parent(GP,P).
+granddaughter(GD,GP):- female(GD), grandchild(GD, GP).
 
 /*--------------------------> RULES CỦA BB <------------------------------*/
 
-sibling(Person1,Person2):-
-    mother(M1, Person1),
-    mother(M2, Person2),
-    father(F1, Person1),
-    father(F2, Person2),
-    M1 == M2, F1 == F2,
-    Person1 \== Person2.
+parents(Father, Mother, Child) :- father(Father, Child), mother(Mother, Child).
 
-cousin(Person1, Person2):-
-    parent(X, Person1),
-    parent(Y, Person2),
-    (cousin(X, Y);
-    sibling(X, Y)).
+grandparents(GP,GM,GC) :- grandfather(GP, GC), grandmother(GM, GC).
 
-brother(Person,Sibling):-
-    sibling(Person, Sibling),
-    male(Person).
+sibling(Person1,Person2):- parents(Father, Mother, Person1), parents(Father, Mother, Person2), diff(Person1, Person2).
 
-sister(Person,Sibling):-
-    sibling(Person, Sibling),
-    female(Person).
+cousin(Person1, Person2):- grandparents(GP, GM, Person1), grandparents(GP, GM, Person2), not(sibling(Person1, Person2)).
 
-brother_cousin(Person,Sibling):-
-    cousin(Person, Sibling),
-    male(Person).
+brother(Person,Sibling):- sibling(Person, Sibling), male(Person).
 
-sister_cousin(Person,Sibling):-
-    cousin(Person, Sibling),
-    female(Person).
+sister(Person,Sibling):- sibling(Person, Sibling), female(Person).
 
-aunt(Person,NieceNephew):-
-    parent(X, NieceNephew), (
-        sister(Person, X);
-        sister_cousin(Person, X); 
-        (
-            wife(Person, Y),
-            (brother(Y, X);
-            brother_cousin(Y, X))
-        )
-    ).
+brother_cousin(Person,Sibling):- cousin(Person, Sibling), male(Person).
 
-uncle(Person,NieceNephew):-
-    husband(Person, X),
-    aunt(X, NieceNephew).
+sister_cousin(Person,Sibling):- cousin(Person, Sibling), female(Person).
 
-niece(Person,AuntUncle):-
-    female(Person),
-    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+aunt(Person,NieceNephew):- female(Person), parents(GP, GM, Person), grandparents(GP, GM, NieceNephew), not(parent(Person, NieceNephew)).
+aunt(Person,NieceNephew):- male(Uncle), parents(GP, GM, Uncle), grandparents(GP, GM, NieceNephew), not(parent(Uncle, NieceNephew)), is_married(Person, Uncle).
 
-nephew(Person,AuntUncle):-
-    male(Person),
-    (aunt(AuntUncle, Person); uncle(AuntUncle, Person)).
+uncle(Person,NieceNephew):- male(Person), parents(GP, GM, Person), grandparents(GP, GM, NieceNephew), not(parent(Person, NieceNephew)).
+uncle(Person,NieceNephew):- aunt(Aunt, NieceNephew), is_married(Person, Aunt).
+
+niece(Person,Aunt):- aunt(Aunt, Person), female(Person). 
+niece(Person,Uncle):- uncle(Uncle, Person), female(Person). 
+
+nephew(Person,Aunt):-  aunt(Aunt, Person), male(Person). 
+nephew(Person,Uncle):- uncle(Uncle, Person), male(Person).  
 
 /*--------------------------> END RULES CỦA BB <------------------------------*/

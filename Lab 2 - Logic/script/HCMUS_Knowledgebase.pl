@@ -1,45 +1,45 @@
 /*FACTS*/
 faculty_of('FIT', 'HCMUS').
 
-department_of('Khoa hoc may tinh', 'FIT').
-department_of('Cong nghe phan mem', 'FIT').
-department_of('Mang May Tinh', 'FIT').
-department_of('Cong nghe tri thuc', 'FIT').
-department_of('Thi giac may tinh', 'FIT').
-department_of('He thong thong tin', 'FIT').
+department_of('KHTM', 'FIT').
+department_of('CNPM', 'FIT').
+department_of('MMT', 'FIT').
+department_of('CNTT', 'FIT').
+department_of('TGMT', 'FIT').
+department_of('HTTT', 'FIT').
 
-subject_of('Nhap mon lap trinh', 'Cong nghe phan mem').
-subject_of('Ki thuat lap trinh', 'Cong nghe phan mem').
-subject_of('Nhap mon cong nghe thong tin 1', 'Khoa hoc may tinh').
-subject_of('Nhap mon cong nghe thong tin 2', 'Khoa hoc may tinh').
-subject_of('Cau truc du lieu & giai thuat', 'Khoa hoc may tinh').
-subject_of('Phuong phap lap trinh huong doi tuong', 'Cong nghe phan mem').
-subject_of('Kien truc may tinh va hop ngu', 'Mang may tinh').
-subject_of('Co so du lieu', 'He thong thong tin').
-subject_of('Mang may tinh', 'Mang may tinh').
-subject_of('He dieu hanh', 'Mang may tinh').
-subject_of('Co so tri tue nhan tao', 'Khoa hoc may tinh').
-subject_of('Khai thac du lieu & ung dung', 'Khoa hoc may tinh').
-subject_of('Nhap mon mat ma', 'Cong nghe tri thuc').
-subject_of('Nhap mon khoa hoc du lieu', 'Khoa hoc may tinh').
-subject_of('Do hoa may tinh', 'Thi giac may tinh').
-subject_of('Xu ly anh so & video so', 'Thi giac may tinh').
+subject_of('Nhap mon lap trinh', 'CNPM').
+subject_of('Ki thuat lap trinh', 'CNPM').
+subject_of('Nhap mon cong nghe thong tin 1', 'KHTM').
+subject_of('Nhap mon cong nghe thong tin 2', 'KHTM').
+subject_of('Cau truc du lieu & giai thuat', 'KHTM').
+subject_of('Phuong phap lap trinh huong doi tuong', 'CNPM').
+subject_of('Kien truc may tinh va hop ngu', 'MMT').
+subject_of('Co so du lieu', 'HTTT').
+subject_of('Mang may tinh', 'MMT').
+subject_of('He dieu hanh', 'MMT').
+subject_of('Co so tri tue nhan tao', 'KHTM').
+subject_of('Khai thac du lieu & ung dung', 'KHTM').
+subject_of('Nhap mon mat ma', 'CNTT').
+subject_of('Nhap mon khoa hoc du lieu', 'KHTM').
+subject_of('Do hoa may tinh', 'TGMT').
+subject_of('Xu ly anh so & video so', 'TGMT').
 
-major_of('Khoa hoc may tinh', 'FIT').
-major_of('Cong nghe tri thuc', 'FIT').
-major_of('Thi giac may tinh', 'FIT').
-major_of('Cong nghe tri thuc', 'FIT').
-major_of('Khoa hoc du lieu', 'FIT').
-major_of('Cong nghe phan mem', 'FIT').
-major_of('He thong thong tin', 'FIT').
+major_of('KHTM', 'FIT').
+major_of('CNTT', 'FIT').
+major_of('TGMT', 'FIT').
+major_of('CNTT', 'FIT').
+major_of('KHDL', 'FIT').
+major_of('CNPM', 'FIT').
+major_of('HTTT', 'FIT').
 major_of('Cong nghe thong tin', 'FIT').
-major_of('Mang may tinh', 'FIT').
+major_of('MMT', 'FIT').
 
-specialization_of('Cong nghe tri thuc', 'Khoa hoc may tinh').
-specialization_of('Thi giac may tinh', 'Khoa hoc may tinh').
-specialization_of('Cong nghe tri thuc', 'Khoa hoc may tinh').
-specialization_of('Khoa hoc du lieu', 'Khoa hoc may tinh').
-specialization_of('Mang may tinh', 'Cong nghe thong tin').
+specialization_of('CNTT', 'KHTM').
+specialization_of('TGMT', 'KHTM').
+specialization_of('CNTT', 'KHTM').
+specialization_of('KHDL', 'KHTM').
+specialization_of('MMT', 'Cong nghe thong tin').
 
 /*----------------------------------------> FACT FOR TESTING <----------------------------------------*/
 /*
@@ -116,6 +116,129 @@ superior('Ho Tan Thanh', 'Nguyen Ngoc Vu').
 
 /*----------------------------------------> END FACT FOR TEACHER (BB) <----------------------------------------*/
 
+/*--------------------------FACTS OF STUDENT (TU)--------------------------*/
+
+male('tu').
+male('son').
+male('bao').
+male('an').
+male('binh').
+
+female('my').
+female('hien').
+female('ha').
+female('tuong').
+
+faculty_of('FIT', 'HCMUS').
+faculty_of('BBT', 'HCMUS').
+
+graduated('my').
+graduated('an').
+graduated('tuong').
+
+student_of_major('tu', 'KHMT').
+student_of_major('son', 'KHMT').
+student_of_major('bao', 'KHDL').
+student_of_major('an','VLHN').
+student_of_major('ha', 'HTTT').
+student_of_major('tuong', 'nmpm').
+
+student_of_faculty('tu', 'FIT').
+student_of_faculty('son', 'FIT').
+student_of_faculty('bao', 'FIT').
+student_of_faculty('an', 'VL').
+student_of_faculty('binh', 'TOAN').
+student_of_faculty('my', 'BBT').
+student_of_faculty('hien', 'HOA').
+student_of_faculty('ha', 'FIT').
+student_of_faculty('tuong', 'FIT').
+
+gpa('tu', 7).
+gpa('son', 4.0).
+gpa('bao', 7.5).
+gpa('an', 6).
+gpa('binh', 5.75).
+gpa('my', 9.9).
+gpa('hien', 7.3).
+gpa('ha', 6.5).
+gpa('tuong', 8).
+
+current_semester_gpa('tu', 6.5).
+current_semester_gpa('son', 7.3).
+current_semester_gpa('bao', 8.5).
+current_semester_gpa('binh', 7).
+current_semester_gpa('hien', 9.2).
+current_semester_gpa('ha', 5.5).
+
+
+training_point('tu', 80).
+training_point('son', 99).
+training_point('bao', 50).
+training_point('an', 85).
+training_point('binh', 72).
+training_point('my', 90).
+training_point('hien', 68).
+training_point('ha', 88).
+training_point('tuong', 95).
+
+day_number_of_volunteer('tu', 5).
+day_number_of_volunteer('son', 7).
+day_number_of_volunteer('bao', 3).
+day_number_of_volunteer('an', 10).
+day_number_of_volunteer('binh', 6).
+day_number_of_volunteer('my', 2).
+day_number_of_volunteer('hien', 3).
+day_number_of_volunteer('ha', 4).
+day_number_of_volunteer('tuong', 4).
+
+english_degree('tu', 'ielts').
+english_degree('son', 'ielts').
+english_degree('bao', 'vnu').
+english_degree('an', 'vnu').
+english_degree('my', 'toeic').
+english_degree('tuong', 'vnu').
+
+health_degree('tu').
+health_degree('son').
+health_degree('my').
+
+studied('tu', '18_21', 'ai', null).
+studied('tu', '18_22', 'ktdl', null).
+studied('son', '18_3', 'hdh', null).
+studied('bao', '18_4', 'tth', null).
+studied('bao', '18_22', 'ktdl', null).
+studied('bao', '18_22', 'ai', 1).
+studied('bao', '18_22', 'ktlt', 5.5).
+studied('tu', '18_22', 'ktlt', 6.5).
+studied('son', '18_22', 'ktlt', 7.5).
+
+teacher('an', 'dp1').
+teacher('hien', 'dp1').
+teacher('binh', 'dp2').
+teacher('ha', 'dp2').
+
+teach_of('an', '18_3', 'hdh').
+teach_of('hien', '18_21', 'ai').
+teach_of('binh', '18_22', 'ktdl').
+teach_of('ha', '18_4', 'tth').
+
+subject_of('ai', 'dp1').
+subject_of('ktdl', 'dp1').
+subject_of('tth', 'dp2').
+subject_of('hdh', 'dp1').
+
+major_of('khmt', 'cntt').
+major_of('khdl', 'cntt').
+
+department_of('dp1', 'cntt').
+department_of('dp2', 'cntt').
+
+superior('an', 'hien').
+superior('an', 'ha').
+superior('binh', 'ha').
+/*----------------------------------------> END RULE OF STUDENT <----------------------------------------*/
+
+
 /*----------------------------------------> RULE OF BB <----------------------------------------*/
 
 schoolarship(Student):-
@@ -148,7 +271,7 @@ prof_of_school(Prof, School):-
     faculty_of(Faculty, School).
 
 student_of_school(Student, School):-
-    student(Student, Major),
+    student_of_major(Student, Major),
     major_of(Major, Faculty),
     faculty_of(Faculty, School).
 
@@ -180,15 +303,15 @@ graduated_type(Student, 'TB'):-
 
 graduated_type(Student, 'Yeu'):-
     gpa(Student, GPA),
-    GPA < 5.
-
+    GPA < 5. 
+ 
 graduate_valedictorian(Student):-
     gpa(Id, W), \+ (gpa(_, W1), W1 > W).
 
 best_of_faculty(Student):-
-    student_of(Student,Faculty1),
+    student_of_faculty(Student,Faculty),
     gpa(Student,Point), \+ (
-        student_of(S,Faculty1),
+        student_of_faculty(S,Faculty1),
         gpa(S,Point1),
         Point1 > Point
     ).
@@ -202,7 +325,7 @@ same_department(Prof1, Prof2):-
     Prof1 \= Prof2.
 
 of_faculty(Person, Faculty):-
-    student_of(Person, Faculty);
+    student_of_faculty(Person, Faculty);
     (teacher(Person, Dep),
     department_of(Dep, Faculty)).
 
@@ -222,11 +345,11 @@ same_school(Person1, Person2):-
 
 male_student(Student):-
     male(Student),
-    student(Student, _).
+    student_of_faculty(Student, _).
 
 female_student(Student):-
     female(Student),
-    student(Student, _).
+    student_of_faculty(Student, _).
 
 male_teacher(Teacher):-
     male(Teacher),
@@ -237,35 +360,76 @@ female_teacher(Teacher):-
     teacher(Teacher, _).
 
 student_type(Student, Type):-
-    student(Student, _),
+    student_of_faculty(Student, _),
     gpa(Student, Point),
-    ((Point >= 4.0,
-    Type =:= 'Xuat sac');
-    (Point >= 3.75, 
-    Type =:= 'Gioi');
-    (Point >= 3.5, 
-    Type =:= 'Kha gioi');
-    (Point >= 3.0,
-    Type =:= 'Kha');
-    (Point >= 2.5,
-    Type =:= 'Trung binh kha');
-    (Point >= 2.0,
-    Type =:= 'Trung binh');
-    (Point >= 1.3,
-    Type =:= 'Yeu');
-    (Point >= 1.0,
-    Type =:= 'Kem');
-    (Point >= 0,
-    Type =:= 'Rat kem')).
+    Type == "Xuat sac",
+    Point == 4.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Gioi',
+    Point < 4,
+    Point >= 3.75.
+
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Kha Gioi',
+    Point < 3.75,
+    Point >= 3.5.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Kha',
+    Point < 3.5,
+    Point >= 3.0.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Trung binh kha',
+    Point < 3,
+    Point >= 2.5.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Trung binh',
+    Point < 2.5,
+    Point >= 2.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Yeu',
+    Point < 2,
+    Point >= 1.3.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == 'Kem',
+    Point < 1.3,
+    Point >= 1.
+
+student_type(Student, Type):-
+    student_of_faculty(Student, _),
+    gpa(Student, Point),
+    Type == "Rat kem",
+    Point < 1,
+    Point >= 0.
+
 
 academic_warning(Student):-
-    student(Student, _),
+    student_of_faculty(Student, _),
     gpa(Student, Point),
     Point < 1.4.
 
 forced_out_of_school(Student):-
-    student(Student, _),
+    student_of_faculty(Student, _),
     gpa(Student, Point),
     Point =:= 0.
-
 /*-------------------------------------*/
