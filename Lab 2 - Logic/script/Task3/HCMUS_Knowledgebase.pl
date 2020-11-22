@@ -1,5 +1,9 @@
 /*FACTS*/
 faculty_of('FIT', 'HCMUS').
+faculty_of('BBT', 'HCMUS').
+faculty_of('PHYS', 'HCMUS').
+faculty_of('MATH', 'HCMUS').
+faculty_of('CHEM', 'HCMUS').
 
 department_of('KHMT', 'FIT').
 department_of('CNPM', 'FIT').
@@ -36,6 +40,10 @@ major_of('CNPM', 'FIT').
 major_of('HTTT', 'FIT').
 major_of('Cong nghe thong tin', 'FIT').
 major_of('MMT', 'FIT').
+major_of('GT', 'MATH').
+major_of('HHC', 'CHEM').
+major_of('VLHN', 'PHYS').
+major_of('SH', 'FBB').
 
 specialization_of('CNTT', 'KHMT').
 specialization_of('TGMT', 'KHMT').
@@ -43,6 +51,36 @@ specialization_of('CNTT', 'KHMT').
 specialization_of('KHDL', 'KHMT').
 specialization_of('MMT', 'Cong nghe thong tin').
 
+/*----------------------------------------> FACT FOR TESTING <----------------------------------------*/
+/*
+student('bao long', 'major A').
+gpa('bao long', 8).
+gpa('Bao', 9).
+trCSTTNTning_point('bao long', 80).
+health_degree('bao long').
+day_number_of_volunteer('bao long', 50).
+english_degree('bao long', 'IELTS").
+
+% subject in department
+subject_of('subject A', 'department A').
+
+% department in faculty
+department_of('department A', 'faculty A').
+
+% teacher in department
+teacher('A teacher', 'department A').
+teacher('Another teacher', 'department A').
+
+superior('A teacher', 'Another teacher').
+
+faculty_of('faculty A', 'school A').
+
+major_of('major A', 'faculty A').
+
+student_of('bao long', 'faculty A').
+student_of('Bao', 'faculty A').
+*/
+/*----------------------------------------> RULE <----------------------------------------*/
 /*----------------------------------------> FACT FOR TEACHER (BB) <----------------------------------------*/
 
 /*  Description
@@ -57,7 +95,7 @@ male('Nguyen Van Khiet').
 male('Ho Tan Thanh').
 male('Nguyen Ngoc Vu').
 male('Tran Tuan Son').
-male('Le Viet  Long').
+male('Le Viet Long').
 
 female('Nguyen Thi Ngoc Thao').
 female('Nguyen Thi Minh Tuyen').
@@ -72,6 +110,7 @@ teacher('Nguyen Van Khiet', 'CNPM').
 teacher('Nguyen Thi Minh Tuyen', 'CNPM').
 teacher('Nguyen Ngoc Vu', 'CNPM').
 teacher('Tran Tuan Son', 'MMT').
+teacher('Le Viet Long', 'MMT').
 
 teach('Le Ngoc Thanh', '18_2', 'NMLT').
 teach('Le Hoai Bac', '18_21', 'CSTTNT').
@@ -107,9 +146,6 @@ female('Hien').
 female('Ha').
 female('Tuong').
 
-faculty_of('FIT', 'HCMUS').
-faculty_of('BBT', 'HCMUS').
-
 graduated('My').
 graduated('An').
 graduated('Tuong').
@@ -120,19 +156,22 @@ student_of_major('Bao', 'KHDL').
 student_of_major('An','VLHN').
 student_of_major('Ha', 'HTTT').
 student_of_major('Tuong', 'CNPM').
+student_of_major('Binh', 'GT').     % Chuyen nganh giai tich
+student_of_major('Hien', 'HHC').    % Chuyen nganh hoa huu co
+student_of_major('My', 'SH').      % Chuyen nganh vi sinh
 
 student_of_faculty('Tu', 'FIT').
 student_of_faculty('Son', 'FIT').
 student_of_faculty('Bao', 'FIT').
-student_of_faculty('An', 'VL').
-student_of_faculty('Binh', 'TOAN').
-student_of_faculty('My', 'BBT').
-student_of_faculty('Hien', 'HOA').
+student_of_faculty('An', 'PHYS').
+student_of_faculty('Binh', 'MATH').
+student_of_faculty('My', 'FBB').
+student_of_faculty('Hien', 'CHEM').
 student_of_faculty('Ha', 'FIT').
 student_of_faculty('Tuong', 'FIT').
 
 gpa('Tu', 7).
-gpa('Son', 4.0).
+gpa('Son', 8.0).
 gpa('Bao', 7.5).
 gpa('An', 6).
 gpa('Binh', 5.75).
@@ -164,7 +203,7 @@ day_number_of_volunteer('Son', 7).
 day_number_of_volunteer('Bao', 3).
 day_number_of_volunteer('An', 10).
 day_number_of_volunteer('Binh', 6).
-day_number_of_volunteer('My', 2).
+day_number_of_volunteer('My', 6).
 day_number_of_volunteer('Hien', 3).
 day_number_of_volunteer('Ha', 4).
 day_number_of_volunteer('Tuong', 4).
