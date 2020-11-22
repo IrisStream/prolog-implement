@@ -281,7 +281,7 @@ student_of_school(Student, School):-
     faculty_of(Faculty, School).
 
 % phó bộ môn là người được trưởng bộ môn quản lý 
-% nó cũng quản lý tất cả các thằng khác trong bộ môn nhưng trong luật không nêu ra
+% người này cũng quản lý tất cả các giảng viên khác trong bộ môn nhưng trong luật không nêu ra
 deputy_head_of_department(Prof):-
     teacher(Prof, AnyDepartment),
     head_of_department(AnotherProf),
