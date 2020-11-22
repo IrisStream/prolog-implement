@@ -130,13 +130,14 @@ granddaughter(GD,GP):- female(GD), grandchild(GD, GP).
 
 /*--------------------------> RULES CỦA BB <------------------------------*/
 
-parents(Father, Mother, Child) :- father(Father, Child), mother(Mother, Child).
+/*--------------------------> END RULES CỦA BB <------------------------------*/
 
-grandparents(GP,GM,GC) :- grandfather(GP, GC), grandmother(GM, GC).
+parents(Father, Mother, Child) :- father(Father, Child), mother(Mother, Child).
 
 sibling(Person1,Person2):- parents(Father, Mother, Person1), parents(Father, Mother, Person2), Person1 \== Person2.
 
-cousin(Person1, Person2):- grandparents(GP, GM, Person1), grandparents(GP, GM, Person2), not(sibling(Person1, Person2)).
+cousin(Person1, Person2):- parent(X, Person1), parent(Y, Person2), cousin(X, Y).
+cousin(Person1, Person2):- parent(X, Person1), parent(Y, Person2), sibling(X, Y).
 
 brother(Person,Sibling):- sibling(Person, Sibling), male(Person).
 
@@ -146,16 +147,19 @@ brother_cousin(Person,Sibling):- cousin(Person, Sibling), male(Person).
 
 sister_cousin(Person,Sibling):- cousin(Person, Sibling), female(Person).
 
-aunt(Person,NieceNephew):- female(Person), parents(GP, GM, Person), grandparents(GP, GM, NieceNephew), not(parent(Person, NieceNephew)).
-aunt(Person,NieceNephew):- male(Uncle), parents(GP, GM, Uncle), grandparents(GP, GM, NieceNephew), not(parent(Uncle, NieceNephew)), is_married(Person, Uncle).
+aunt(Person, NieceNephew):- parent(X, NieceNephew),sister(Person, X).
+aunt(Person, NieceNephew):- parent(X, NieceNephew),sister_cousin(Person, X).
+aunt(Person, NieceNephew):- parent(X, NieceNephew),wife(Person, Y),brother(Y, X).
+aunt(Person, NieceNephew):- parent(X, NieceNephew),wife(Person, Y),brother_cousin(Y, X).
 
-uncle(Person,NieceNephew):- male(Person), parents(GP, GM, Person), grandparents(GP, GM, NieceNephew), not(parent(Person, NieceNephew)).
-uncle(Person,NieceNephew):- aunt(Aunt, NieceNephew), is_married(Person, Aunt).
+% uncle(Person,NieceNephew):- husband(Person, X),aunt(X, NieceNephew).
+uncle(Person,NieceNephew):- parent(X, NieceNephew),husband(Person, Y),sister(Y, X).
+uncle(Person,NieceNephew):- parent(X, NieceNephew),husband(Person, Y),sister_cousin(Y, X).
+uncle(Person,NieceNephew):- parent(X, NieceNephew),brother(Person, X).
+uncle(Person,NieceNephew):- parent(X, NieceNephew),brother_cousin(Person, X).
 
-niece(Person,Aunt):- aunt(Aunt, Person), female(Person). 
-niece(Person,Uncle):- uncle(Uncle, Person), female(Person). 
+niece(Person,AuntUncle):- female(Person),aunt(AuntUncle, Person).
+niece(Person,AuntUncle):- female(Person),uncle(AuntUncle, Person).
 
-nephew(Person,Aunt):-  aunt(Aunt, Person), male(Person). 
-nephew(Person,Uncle):- uncle(Uncle, Person), male(Person).  
-
-/*--------------------------> END RULES CỦA BB <------------------------------*/
+nephew(Person,AuntUncle):- male(Person),aunt(AuntUncle, Person).
+nephew(Person,AuntUncle):- male(Person),uncle(AuntUncle, Person).
