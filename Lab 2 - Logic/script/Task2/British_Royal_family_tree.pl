@@ -134,7 +134,7 @@ parents(Father, Mother, Child) :- father(Father, Child), mother(Mother, Child).
 
 grandparents(GP,GM,GC) :- grandfather(GP, GC), grandmother(GM, GC).
 
-sibling(Person1,Person2):- parents(Father, Mother, Person1), parents(Father, Mother, Person2), diff(Person1, Person2).
+sibling(Person1,Person2):- parents(Father, Mother, Person1), parents(Father, Mother, Person2), Person1 \== Person2.
 
 cousin(Person1, Person2):- grandparents(GP, GM, Person1), grandparents(GP, GM, Person2), not(sibling(Person1, Person2)).
 
