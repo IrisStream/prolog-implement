@@ -109,7 +109,7 @@ def procFile(f, prompt, output = sys.stdout):
 
         statement = re.sub("  ", " ",statement)         
         statement = statement.rstrip()
-        if(prompt == 'Query' and output == sys.stdout):
+        if(prompt == 'Query' and output != sys.stdout):
             statement = statement[2:]                       #remove '?-'
         if statement == "" or statement == ' ': 
             continue
@@ -265,5 +265,5 @@ if __name__ == "__main__":
     for file in inputfile:
         procFile(open(file),'KB')      # file on the command line
     for file in queryfile:
-        procFile(open(file),'Query', sys.stdout)         # let the user have her say
+        procFile(open(file),'Query', output)         # let the user have her say
     output.close()

@@ -141,7 +141,7 @@ student_of_major('son', 'KHMT').
 student_of_major('bao', 'KHDL').
 student_of_major('an','VLHN').
 student_of_major('ha', 'HTTT').
-student_of_major('tuong', 'nmpm').
+student_of_major('tuong', 'CNPM').
 
 student_of_faculty('tu', 'FIT').
 student_of_faculty('son', 'FIT').
