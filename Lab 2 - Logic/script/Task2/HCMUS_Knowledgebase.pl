@@ -405,3 +405,46 @@ forced_out_of_school(Student):-
     gpa(Student, Point),
     Point =:= 0.
 /*-------------------------------------*/
+/*-------------Rule of Tu-------------*/
+still_studying(Student):-
+    student_of_faculty(Student,Faculty),
+    \+(graduated(Student)).
+
+subject_passed(Student, Subject):-
+    studied(Student, Class, Subject, Point),
+    Point\=={null},
+    Point>=5.
+
+teach_of(Prof,Student,Subject):-
+    teach(Prof,Class,Subject),
+    studied(Student,Class,Subject,Point).
+
+is_studied(Student,Prof,Subject):-
+    studied(Student,Class,Subject,Point),
+    teach(Prof,Class,Subject).
+
+classmate(Student1,Student2):-
+    studied(Student1,Class,Subject,Point1),
+    studied(Student2,Class,Subject,Point2),
+    Student1 \= Student2.
+
+same_major(Student1,Student2):-
+    student_of_major(Student1,Major),
+    student_of_major(Student2,Major),
+    Student1\==Student2.
+
+gpa_greater(Student1,Student2):-
+    gpa(Student1,Point1),
+    gpa(Student2,Point2),
+    Point1>Point2.
+
+best_of_class(Student,Class,Subject):-
+    studied(Student,Class,Subject,Point), \+ (studied(_,Class,Subject,Point1), Point1\=={null}, Point1 > Point).
+
+
+best_of_major(Student,Major):-
+    student_of_major(Student,Major),
+    gpa(Student,Point), \+ (
+        student_of_major(AnotherStudent,Major),
+        gpa(AnotherStudent,Point1),
+        Point1 > Point).
