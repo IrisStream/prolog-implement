@@ -32,22 +32,58 @@ class Term:
         return "Term"
 
 def diff(term, subst):
-    return (subst[term.args[0]] != subst[term.args[1]])
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (x != y)
 
 def equal(term, subst):
-    return (subst[term.args[0]] == subst[term.args[1]])
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (x == y)
 
 def greater(term, subst):
-    return (float(subst[term.args[0]]) > float(subst[term.args[1]]))
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (float(x) > float(y))
 
 def less(term, subst):
-    return (float(subst[term.args[0]]) < float(subst[term.args[1]]))
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (float(x) < float(y))
 
 def greater_equal(term, subst):
-    return (float(subst[term.args[0]]) >= float(subst[term.args[1]]))
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (float(x) >= float(y))
 
 def less_equal(term, subst):
-    return (float(subst[term.args[0]]) <= float(subst[term.args[1]]))
+    x = term.args[0]
+    y = term.args[1]
+    if(x in subst):
+        x = subst[x]
+    if(y in subst):
+        y = subst[y]
+    return (float(x) <= float(y))
 
 special_term = {
     'diff' : diff,
@@ -105,11 +141,11 @@ def procFile(f, prompt, output = sys.stdout):
             while statement.find('*/') < 0:
                 statement = f.readline()
             continue
-        statement = re.sub("#.*","",statement[:-1])   
+        statement = re.sub("%.*","",statement[:-1])   
 
         statement = re.sub("  ", " ",statement)         
         statement = statement.rstrip()
-        if(prompt == 'Query' and output != sys.stdout):
+        if prompt == 'Query':
             statement = statement[2:]                       #remove '?-'
         if statement == "" or statement == ' ': 
             continue
@@ -153,13 +189,13 @@ def unify(src_term, src_subst, dest_term, dest_subst):
     for i in range(nargs):
         src_arg  = src_term.args[i]
         dest_arg = dest_term.args[i]
-        if src_arg[0] >= 'A' and src_arg[0] <= 'Z':
+        if (src_arg[0] >= 'A' and src_arg[0] <= 'Z') or src_arg[0] == '_':
             src_val = src_subst.get(src_arg)
         else:
             src_val = src_arg
         if not src_val:    #src_val is a variable
             continue
-        if dest_arg[0] >= 'A' and dest_arg[0] <= 'Z':  # Variable in destination
+        if (dest_arg[0] >= 'A' and dest_arg[0] <= 'Z') or src_arg[0] == '_':  # Variable in destination
             dest_val = dest_subst.get(dest_arg)
             if not dest_val:
                 dest_subst[dest_arg] = src_val  # Unify !
@@ -168,7 +204,7 @@ def unify(src_term, src_subst, dest_term, dest_subst):
         elif dest_arg != src_val:
             return 0           # Won't unify
     # check for special term
-    if src_term.pred in special_term and len(dest_subst) == 2:
+    if src_term.pred in special_term:
         for predi in special_term:
             if src_term.pred == predi and not special_term[predi](dest_term, dest_subst):
                 return 0
@@ -260,7 +296,10 @@ def arg_parser():
     return args.input, args.query, args.output
 
 if __name__ == "__main__": 
-    inputfile, queryfile, outputfile = arg_parser()
+    #inputfile, queryfile, outputfile = arg_parser()
+    inputfile = ['family-tree.pl']
+    queryfile = ['family-tree1.pl']
+    outputfile = 'output.txt'
     inputfile.append('input.pl')
     output = open(outputfile,'w')
     for file in inputfile:
