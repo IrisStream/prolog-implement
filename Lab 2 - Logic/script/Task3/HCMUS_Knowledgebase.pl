@@ -307,3 +307,21 @@ academic_warning(Student):- student_of_faculty(Student, _), gpa(Student, Point),
 
 forced_out_of_school(Student):- student_of_faculty(Student, _), gpa(Student, Point), equal(Point, 0).
 /*-------------------------------------*/
+/*-------Rule of Tu-------*/
+still_studying(Student):- student_of_faculty(Student,Faculty), not(graduated(Student)).
+
+subject_passed(Student, Subject):- studied(Student, Class, Subject, Point), diff(Point, null), greater_equal(Point, 5).
+
+teach_of(Prof,Student,Subject):- teach(Prof,Class,Subject), studied(Student,Class,Subject,Point).
+
+is_studied(Student,Prof,Subject):- studied(Student,Class,Subject,Point), teach(Prof,Class,Subject).
+
+classmate(Student1,Student2):- studied(Student1,Class,Subject,Point1), studied(Student2,Class,Subject,Point2), diff(Student1, Student2).
+
+same_major(Student1,Student2):- student_of_major(Student1,Major), student_of_major(Student2,Major), diff(Student1, Student2).
+
+gpa_greater(Student1,Student2):- gpa(Student1,Point1), gpa(Student2,Point2), greater(Point1, Point2).
+
+best_of_class(Student,Class,Subject):- studied(Student,Class,Subject,Point), not(studied(_,Class,Subject,Point1), diff(Point1, null), greater(Point1, Point)).
+
+best_of_major(Student,Major):- student_of_major(Student,Major), gpa(Student,Point), not(student_of_major(AnotherStudent,Major), gpa(AnotherStudent,Point1), greater(Point1, Point)).
